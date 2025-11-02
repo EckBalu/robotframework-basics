@@ -1,49 +1,49 @@
 import argparse
+
 from robot.api import TestSuiteBuilder
+from robot.model import SuiteVisitor, TestSuite
+
+
+class TestCaseCollector(SuiteVisitor):
+    def visit_suite(self, suite: TestSuite):
+        for test in suite.tests:
+            print(
+                f"Test Case: {test.full_name}\n"
+                f"Tags: {test.tags if test.tags else 'no tags were set'}\n"
+                f"Documentation: {test.doc if test.doc else 'no documentation available'}\n"
+            )
+        for suite in suite.suites:
+            self.visit_suite(suite)
 
 
 def get_command_line_arguments():
     parser = argparse.ArgumentParser(
-        prog='Test Case List',
-        description='Lists the test cases in a specific test suite.'
+        prog="Test Case List",
+        description="Lists the test cases in a specific test suite.",
     )
     parser.add_argument(
-        '-v', '--version',
-        action='version',
-        version=f'{parser.prog} 1.0.0'
+        "-v", "--version", action="version", version=f"{parser.prog} 1.0.0"
     )
     parser.add_argument(
-        '-s', '--suite',
+        "-s",
+        "--suite",
         type=str,
-        help='Path to the root folder (or file) of the test suite.'
+        required=True,
+        help="Path to the test suite (folder or file).",
     )
     return parser.parse_args()
 
 
-def list_test_cases_from_suite(parent_suite, full_path_to_suite):
-    for test_case in parent_suite.tests:
-        print(f'Test Case: {full_path_to_suite}.{test_case.name}')
-        print(f'Tags: {test_case.tags}')
-        print(f'Documentation: {test_case.doc}\n-')
+def collect_test_cases_from_suite(suite):
+    root_suite = TestSuiteBuilder().build(suite)
+    collector = TestCaseCollector()
+    root_suite.visit(collector)
 
 
-def visit_test_suites(parent_suite, full_path_to_suite):
-    list_test_cases_from_suite(parent_suite, full_path_to_suite)
-
-    for suite in parent_suite.suites:
-        new_path = f'{full_path_to_suite}.{suite.name}'
-        if suite.tests:
-            list_test_cases_from_suite(suite, new_path)
-        if suite.suites:
-            visit_test_suites(suite, new_path)
+def main(cli_args):
+    collect_test_cases_from_suite(cli_args.suite)
 
 
-def main():
-    root_suite = TestSuiteBuilder().build(CLI_ARGS.suite)
-    print(f'Root Suite: {root_suite.name}\n-')
-    visit_test_suites(root_suite, root_suite.name)
-
-
-if __name__ == '__main__':
-    CLI_ARGS = get_command_line_arguments()
-    main()
+if __name__ == "__main__":
+    cli_args = get_command_line_arguments()
+    main(cli_args)
