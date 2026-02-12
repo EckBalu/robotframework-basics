@@ -11,6 +11,12 @@
 !!! info "Hints"
     You can use `SSHLibrary` to open a connection to a remote host using `SSH`.
 
+    To use `SSHLibrary` you need to install the `robotframework-sshlibrary`.
+
+    ``` bash
+    pip install robotframework-sshlibrary
+    ```
+    
     [Click here to learn more about `SSHLibrary` and its keywords.](https://marketsquare.github.io/SSHLibrary/SSHLibrary.html).
 
 ??? success "Solution: `tests/03-remote/01-connection.robot`"

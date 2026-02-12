@@ -9,6 +9,12 @@
 
 !!! info "Hints"
     `Robocop` is a static analysis tool that can be used to check your Robot Framework related files.
+    
+    To use `Robocop` you need to install the required dependencies.
+
+    ``` bash
+    pip install robotframework-robocop typing_extensions
+    ```
 
     [Click here to learn more about `Robocop`](https://robocop.readthedocs.io/en/stable/).
 
@@ -17,11 +23,11 @@
 In the `tests` folder, execute the following command.
 
 ``` bash
-robocop .
+robocop check .
 ```
 
 You can list all the available rules by executing the following command.
 
 ``` bash
-robocop --list
+robocop list rules
 ```
