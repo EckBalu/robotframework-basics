@@ -10,10 +10,10 @@
 !!! info "Hints"
     `Robocop` is a static analysis tool that can be used to check your Robot Framework related files.
     
-    To use `Robocop` you need to install the required dependencies.
+    In order to use the `Robocop`, you must first install the `robotframework-robocop` package.
 
     ``` bash
-    pip install robotframework-robocop typing_extensions
+    pip install robotframework-robocop
     ```
 
     [Click here to learn more about `Robocop`](https://robocop.readthedocs.io/en/stable/).
