@@ -9,7 +9,7 @@
 
 !!! info "Hints"
     `Robocop` is a static analysis tool that can be used to check your Robot Framework related files.
-    
+
     In order to use the `Robocop`, you must first install the `robotframework-robocop` package.
 
     ``` bash

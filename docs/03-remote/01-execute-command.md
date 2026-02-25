@@ -16,7 +16,7 @@
     ``` bash
     pip install robotframework-sshlibrary
     ```
-    
+
     [Click here to learn more about `SSHLibrary` and its keywords.](https://marketsquare.github.io/SSHLibrary/SSHLibrary.html).
 
 ??? success "Solution: `tests/03-remote/01-connection.robot`"
